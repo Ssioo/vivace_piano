@@ -9,7 +9,7 @@
 
 export const isDev = process.env.NODE_ENV !== 'production'
 
-export const BASE_URL = isDev ? 'http://localhost:5000' : 'https://www.vivacepiano.club'
+export const BASE_URL = 'https://us-central1-vivacepiano-fb077.cloudfunctions.net'
 
 export const FIREBASE_CONFIG = {
   apiKey: 'AIzaSyB4YdA0JOVS-91_9RLLb36Jug7eeHLKrF4',
@@ -22,7 +22,7 @@ export const FIREBASE_CONFIG = {
   measurementId: 'G-7WF9D535D4'
 }
 
-export const FCM_KEY = 'BPowusk4igXsw2fQBJ856ZJUSAkTAE81LRe84c7_6ZWD2nP0WDew1BhBShVlXg856bgTD-YkmHEGP_i_GoZnwaA'
+export const FCM_KEY = 'BJ-gOUz7jJlX95gEjvGSdf8brBns_iiqT6-lcCmhH21F1uqK8GDgJ4aEBOMKH2EGHL_m7sPPVNywoNUTEtz6tA0'
 
 export const WINDOW_WIDTH = window.innerWidth
 export const WINDOW_HEIGHT = window.innerHeight

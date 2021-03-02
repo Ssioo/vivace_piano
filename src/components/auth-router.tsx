@@ -29,6 +29,6 @@ export class AuthRoute extends Route<AuthRouteProps> {
         strict={this.props.strict}
       >
         {this.props.children}
-      </Route> : <Redirect to='/' />)
+      </Route> : <Redirect to='/login' />)
   }
 }
