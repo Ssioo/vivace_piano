@@ -9,7 +9,7 @@
 
 export const isDev = process.env.NODE_ENV !== 'production'
 
-export const BASE_URL = 'https://us-central1-vivacepiano-fb077.cloudfunctions.net'
+export const BASE_URL = 'https://us-central1-vivacepiano-fb077.cloudfunctions.net/api'
 
 export const FIREBASE_CONFIG = {
   apiKey: 'AIzaSyB4YdA0JOVS-91_9RLLb36Jug7eeHLKrF4',
