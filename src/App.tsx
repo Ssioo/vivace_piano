@@ -6,6 +6,7 @@ import { userStore } from './stores/user'
 import { DrawerSheet } from './components/drawer-navigator'
 import { VivaceTitleBar } from './components/app-bar'
 import { appStore } from './stores/app'
+import { LoadingIndicator } from './components/loading-indicator'
 
 const Home = lazy(() => import('./screens/home'))
 const Members = lazy(() => import('./screens/members'))
@@ -38,6 +39,7 @@ const App = observer(() => {
         </Suspense>
         <DrawerSheet/>
       </BrowserRouter>
+      <LoadingIndicator />
     </>
   )
 })

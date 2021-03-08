@@ -5,6 +5,7 @@ import { userStore } from '../stores/user'
 import { TextFieldsOutlined } from '@material-ui/icons'
 import { Button, Container, TextField } from '@material-ui/core'
 import { VivaceContainer } from '../components/app-bar'
+import { appStore } from '../stores/app'
 
 const LoginScreen = () => {
   const history = useHistory()
@@ -62,11 +63,15 @@ const LoginScreen = () => {
             alert('휴대폰 번호 또는 비밀번호를 확인해주세요.')
             return
           }
+          appStore.loading = true
           const res = await userStore.tryLogin(phone, pwd)
           if (res) {
             const name = await userStore.getProfile()
+            appStore.loading = false
             alert(`${name}님 환영합니다.`)
             history.replace('/')
+          } else {
+            appStore.loading = false
           }
         }}
       >
