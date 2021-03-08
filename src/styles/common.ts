@@ -19,6 +19,13 @@ export const Button = styled.button`
   text-align: center;
   opacity: 1;
   &:hover {
+    opacity: 0.8;
+  }
+  &:active {
     opacity: 0.38;
   }
+`
+
+export const TextInput = styled.input`
+  
 `

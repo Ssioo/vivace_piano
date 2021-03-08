@@ -3,6 +3,7 @@ import { observer } from 'mobx-react-lite'
 import { membersStore } from '../stores/members'
 import { Member } from '../models/user'
 import { Title } from '../styles/common'
+import { VivaceContainer } from '../components/app-bar'
 
 const MembersScreen = () => {
   useEffect(() => {
@@ -10,12 +11,12 @@ const MembersScreen = () => {
   }, [])
 
   return (
-    <div>
+    <VivaceContainer>
       <Title>
         Members
       </Title>
       <MemberListView />
-    </div>
+    </VivaceContainer>
   )
 }
 
@@ -23,7 +24,7 @@ const MemberListView = observer(() => {
   return (
     <div>
       {membersStore.members.map((m) => (
-        <MemberItemView member={m} key={m.id}/>
+        <MemberItemView member={m} key={m.key}/>
       ))}
     </div>
   )

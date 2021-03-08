@@ -7,8 +7,10 @@
  * @link http://github.com/Ssioo/nnadhoc_ble for the original source repository
  */
 
+import { NetworkMessage } from './base'
+
 export class ApiError extends Error {
-  constructor(res) {
-    super(`${res.success}`)
+  constructor(res: NetworkMessage<any>) {
+    super(`[${res.status}] ${res.msg}`)
   }
 }

@@ -13,7 +13,7 @@ import { KEY_TOKEN } from '../infras/storage'
 export interface NetworkMessage<T> {
   status: number
   data: T
-  message?: string
+  msg?: string
 }
 
 export class BaseApi {
@@ -25,7 +25,7 @@ export class BaseApi {
     return {
       'Content-Type': 'application/json',
       Accept: 'application/json',
-      Authorization: this.token || ''
+      'x-access-token': this.token || ''
     }
   }
 

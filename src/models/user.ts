@@ -1,9 +1,13 @@
+export interface Jwt {
+  token: string
+}
+
 export interface User extends Member {
 
 }
 
 export interface Member {
-  id: string
+  key: string
   name: string
   phone: string
   generation: number[]
