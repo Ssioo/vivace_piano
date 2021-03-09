@@ -1,4 +1,4 @@
-import React, { lazy, Suspense, useLayoutEffect } from 'react'
+import React, { lazy, Suspense, useEffect, useLayoutEffect } from 'react'
 import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom'
 import { AuthRoute } from './components/auth-router'
 import { observer } from 'mobx-react-lite'
@@ -7,12 +7,17 @@ import { DrawerSheet } from './components/drawer-navigator'
 import { VivaceTitleBar } from './components/app-bar'
 import { appStore } from './stores/app'
 import { LoadingIndicator } from './components/loading-indicator'
+import { VivaceSnackBar } from './components/snack-bar'
 
 const Home = lazy(() => import('./screens/home'))
 const Members = lazy(() => import('./screens/members'))
 const Login = lazy(() => import('./screens/login'))
 
 const App = observer(() => {
+
+  useEffect(() => {
+    userStore.loadLastAuthInfo()
+  }, [])
 
   useLayoutEffect(() => {
     const listener = () => {
@@ -27,7 +32,7 @@ const App = observer(() => {
 
   return (
     <>
-      <VivaceTitleBar/>
+      <VivaceTitleBar />
       <BrowserRouter>
         <Suspense fallback={<div>Loading...</div>}>
           <Switch>
@@ -40,6 +45,7 @@ const App = observer(() => {
         <DrawerSheet/>
       </BrowserRouter>
       <LoadingIndicator />
+      <VivaceSnackBar />
     </>
   )
 })

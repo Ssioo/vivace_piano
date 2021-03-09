@@ -8,3 +8,5 @@
  */
 
 export const KEY_TOKEN = 'token'
+export const KEY_LAST_USERID = 'user_id'
+export const KEY_LAST_USERPW = 'user_pw'

@@ -1,6 +1,7 @@
 import { Member } from '../models/user'
 import { makeAutoObservable } from 'mobx'
 import { membersApi } from '../apis/members'
+import { showToast } from '../components/snack-bar'
 
 class MembersStore {
   members: Member[] = []
@@ -13,6 +14,7 @@ class MembersStore {
     try {
       this.members = await membersApi.getMembers()
     } catch (e) {
+      showToast(e)
       console.log(e)
     }
   }

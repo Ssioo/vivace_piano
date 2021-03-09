@@ -1,6 +1,7 @@
 import { AppBar, Container, IconButton, Toolbar, Typography } from '@material-ui/core'
 import { appStore } from '../stores/app'
 import MenuIcon from '@material-ui/icons/Menu'
+import ArrowBackIosIcon from '@material-ui/icons/ArrowBackIos'
 import React from 'react'
 import { observer } from 'mobx-react-lite'
 
@@ -16,8 +17,14 @@ export const VivaceTitleBar = observer(() => {
         <IconButton
           color='inherit'
           aria-label='Open Drawer'
-          onClick={() => appStore.isDrawerOpen = true}>
-          <MenuIcon />
+          onClick={() => {
+            if (appStore.isRoot)
+              appStore.isDrawerOpen = true
+            else {
+              history.back()
+            }
+          }}>
+          {appStore.isRoot ? <MenuIcon/> : <ArrowBackIosIcon />}
         </IconButton>
         <Typography variant='h6' noWrap>
           {appStore.title || 'VIVACE'}

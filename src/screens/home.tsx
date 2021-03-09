@@ -23,6 +23,7 @@ const cardItems: Array<{ title: string, src: string }> = [
 
 const HomeScreen = () => {
   useEffect(() => {
+    appStore.isRoot = true
     appStore.title = 'VIVACE'
   }, [])
 

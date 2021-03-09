@@ -4,6 +4,8 @@ import { userStore } from '../stores/user'
 import { Button, TextField } from '@material-ui/core'
 import { VivaceContainer } from '../components/app-bar'
 import { appStore } from '../stores/app'
+import { KEY_LAST_USERID, KEY_LAST_USERPW } from '../infras/storage'
+import { showToast } from '../components/snack-bar'
 
 const LoginScreen = () => {
   const history = useHistory()
@@ -14,7 +16,12 @@ const LoginScreen = () => {
   const [isValidPwd, setValidPwd] = useState(true)
 
   useEffect(() => {
+    appStore.isRoot = false
     appStore.title = '로그인'
+    const lastPhone = localStorage.getItem(KEY_LAST_USERID)
+    const lastPwd = localStorage.getItem(KEY_LAST_USERPW)
+    if (lastPhone !== null) setPhone(lastPhone)
+    if (lastPwd !== null) setPwd(lastPwd)
   }, [])
 
   return (
@@ -59,7 +66,7 @@ const LoginScreen = () => {
         color='primary'
         onClick={async () => {
           if (!isValidPwd || !isValidPhone) {
-            alert('휴대폰 번호 또는 비밀번호를 확인해주세요.')
+            showToast('휴대폰 번호 또는 비밀번호를 확인해주세요.')
             return
           }
           appStore.loading = true
@@ -67,7 +74,7 @@ const LoginScreen = () => {
           if (res) {
             const name = await userStore.getProfile()
             appStore.loading = false
-            alert(`${name}님 환영합니다.`)
+            showToast(`${name}님 환영합니다.`)
             history.replace('/')
           } else {
             appStore.loading = false

@@ -5,7 +5,7 @@ import { Member } from '../models/user'
 import { VivaceContainer } from '../components/app-bar'
 import {
   Box, Button,
-  Collapse,
+  Collapse, Hidden,
   IconButton,
   Table,
   TableBody,
@@ -23,13 +23,22 @@ import { appStore } from '../stores/app'
 
 const MembersScreen = () => {
   useEffect(() => {
+    appStore.loading = true
     membersStore.fetchMembers()
+      .finally(() => appStore.loading = false)
+    appStore.isRoot = true
     appStore.title = '멤버관리'
   }, [])
 
   return (
     <VivaceContainer size='xl'>
       <MemberListView/>
+      <Button
+        variant='contained'
+        color='primary'
+      >
+        추가하기
+      </Button>
     </VivaceContainer>
   )
 }
@@ -41,7 +50,7 @@ const MemberListView = observer(() => {
   return (
     <>
       <TableContainer>
-        <Table stickyHeader>
+        <Table stickyHeader style={{ minWidth: 600 }} size='small'>
           <TableHead>
             <TableRow>
               <TableCell align='center'>이름</TableCell>
@@ -81,7 +90,9 @@ const MemberItemView: React.FC<{ member: Member }> = ({ member }) => {
 
   useEffect(() => {
     if (isOpen) {
+      appStore.loading = true
       // TODO: fetch 활동내역
+      appStore.loading = false
     }
   }, [isOpen])
 
