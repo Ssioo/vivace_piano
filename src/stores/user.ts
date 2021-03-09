@@ -1,8 +1,7 @@
 import { makeAutoObservable } from 'mobx'
 import { KEY_TOKEN } from '../infras/storage'
-import { User } from '../models/user'
+import { Role, User } from '../models/user'
 import { userApi } from '../apis/user'
-import * as baseApi from '../apis/base'
 
 class UserStore {
   token: string | null = null
@@ -10,6 +9,10 @@ class UserStore {
 
   get hasToken() {
     return !!this.token
+  }
+
+  get isAdmin() {
+    return this.profile?.roles.some((r) => r !== Role.COMMON) ?? false
   }
 
   constructor() {

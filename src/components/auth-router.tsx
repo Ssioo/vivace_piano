@@ -12,6 +12,7 @@ import { Redirect, Route, RouteProps } from 'react-router-dom'
 
 export interface AuthRouteProps extends RouteProps {
   authenticated: boolean
+  isLogin: boolean
   redirect?: string
 }
 
@@ -19,7 +20,7 @@ export class AuthRoute extends Route<AuthRouteProps> {
 
   render() {
     return (
-      this.props.authenticated ?
+      this.props.authenticated && this.props.isLogin ?
       <Route
         path={this.props.path}
         exact={this.props.exact}
@@ -30,6 +31,6 @@ export class AuthRoute extends Route<AuthRouteProps> {
         strict={this.props.strict}
       >
         {this.props.children}
-      </Route> : <Redirect to={this.props.redirect || '/login'} />)
+      </Route> : <Redirect to={this.props.redirect || this.props.isLogin ? '/' : '/login'} />)
   }
 }

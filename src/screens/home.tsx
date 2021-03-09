@@ -1,9 +1,10 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import { Title } from '../styles/common'
 import { CardActionArea, CardContent, CardMedia, Paper, Typography } from '@material-ui/core'
 import 'react-responsive-carousel/lib/styles/carousel.min.css'
 import { Carousel } from 'react-responsive-carousel'
 import { VivaceContainer } from '../components/app-bar'
+import { appStore } from '../stores/app'
 
 const cardItems: Array<{ title: string, src: string }> = [
   {
@@ -21,6 +22,9 @@ const cardItems: Array<{ title: string, src: string }> = [
 ]
 
 const HomeScreen = () => {
+  useEffect(() => {
+    appStore.title = 'VIVACE'
+  }, [])
 
   return (
     <VivaceContainer>

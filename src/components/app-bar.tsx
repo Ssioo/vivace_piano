@@ -28,7 +28,7 @@ export const VivaceTitleBar = observer(() => {
 })
 
 export const VivaceContainer = (props) => (
-  <Container maxWidth='sm' style={{ marginTop: 48 }}>
+  <Container maxWidth={props.size ?? 'sm'} style={{ marginTop: 48 }}>
     {props.children}
   </Container>
 )

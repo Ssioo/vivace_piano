@@ -33,7 +33,7 @@ const App = observer(() => {
           <Switch>
             <Route exact path='/' component={Home}/>
             <Route exact path='/login' component={Login}/>
-            <AuthRoute exact path='/members' authenticated={userStore.hasToken} component={Members}/>
+            <AuthRoute exact path='/members' authenticated={userStore.isAdmin} isLogin={userStore.hasToken} component={Members}/>
             <Redirect path='*' to='/'/>
           </Switch>
         </Suspense>

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
-import { Title } from '../styles/common'
 import { userStore } from '../stores/user'
-import { TextFieldsOutlined } from '@material-ui/icons'
-import { Button, Container, TextField } from '@material-ui/core'
+import { Button, TextField } from '@material-ui/core'
 import { VivaceContainer } from '../components/app-bar'
 import { appStore } from '../stores/app'
 
@@ -15,11 +13,12 @@ const LoginScreen = () => {
   const [isValidPhone, setValidPhone] = useState(true)
   const [isValidPwd, setValidPwd] = useState(true)
 
+  useEffect(() => {
+    appStore.title = '로그인'
+  }, [])
+
   return (
     <VivaceContainer>
-      <Title>
-        Log In
-      </Title>
       <div>
         <TextField
           value={phone}

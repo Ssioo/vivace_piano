@@ -10,11 +10,17 @@ export interface Member {
   key: string
   name: string
   phone: string
-  generation: number[]
-  role: Role[]
+  pwd: string
+  univ: string
+  department: string
+  hakbun: number
+  generations: number[]
+  roles: Role[]
   group: GroupType
+  birth: string
   createdAt: string
   expiredAt: string | null
+  memo: string | null
 }
 
 export enum Role {
