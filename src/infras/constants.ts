@@ -1,12 +1,3 @@
-/*
- * Copyright: Copyright (c) 2021. wooisso <yeonwoo.cho@yonsei.ac.kr>
- * License: MIT
- * webcross_ar_app from Mobed Laboratory, Yonsei University
- * Last Updated At 21. 2. 23. 오후 4:17
- *
- * @link http://github.com/Ssioo/nnadhoc_ble for the original source repository
- */
-
 export const isDev = process.env.NODE_ENV !== 'production'
 
 export const BASE_URL = 'https://us-central1-vivacepiano-fb077.cloudfunctions.net/v1'

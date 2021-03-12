@@ -1,5 +1,5 @@
 import { observer } from 'mobx-react-lite'
-import { Divider, Drawer, List, ListItem, ListItemIcon, ListItemText, SvgIconTypeMap } from '@material-ui/core'
+import { Divider, Drawer, Hidden, List, ListItem, ListItemIcon, ListItemText, SvgIconTypeMap } from '@material-ui/core'
 import PermIdentityIcon from '@material-ui/icons/PermIdentity'
 import HomeIcon from '@material-ui/icons/Home'
 import React from 'react'
@@ -22,13 +22,13 @@ const DrawerItem: React.FC<{
     }}
   >
     <ListItemIcon>
-      <Leading />
+      <Leading/>
     </ListItemIcon>
-    <ListItemText primary={title} />
+    <ListItemText primary={title}/>
   </ListItem>
 )
 
-export const DrawerSheet = observer(() => {
+const DrawerItemList = observer(() => {
   const history = useHistory()
 
   const pushIfAbsent = (path: string) => {
@@ -36,43 +36,65 @@ export const DrawerSheet = observer(() => {
   }
 
   return (
-    <Drawer
-      anchor='left'
-      open={appStore.isDrawerOpen}
-      onClose={() => appStore.isDrawerOpen = false}
-      variant={appStore.windowWidth > 768 ? 'permanent' : 'temporary'}
-    >
-      <List>
+    <List>
+      <DrawerItem
+        title='HOME'
+        Leading={HomeIcon}
+        onClick={() => pushIfAbsent('/')}
+      />
+      <Divider/>
+      {!userStore.hasToken &&
+      <DrawerItem
+        title='로그인'
+        Leading={PermIdentityIcon}
+        onClick={() => pushIfAbsent('/login')}
+      />}
+      {userStore.hasToken && <>
         <DrawerItem
-          title='HOME'
-          Leading={HomeIcon}
-          onClick={() => pushIfAbsent('/')}
+          title='멤버관리'
+          Leading={PermIdentityIcon}
+          onClick={() => pushIfAbsent('/members')}
         />
-        <Divider/>
-        {!userStore.hasToken &&
-          <DrawerItem
-            title='로그인'
-            Leading={PermIdentityIcon}
-            onClick={() => pushIfAbsent('/login')}
-          />}
-        {userStore.hasToken && <>
-          <DrawerItem
-            title='멤버관리'
-            Leading={PermIdentityIcon}
-            onClick={() => pushIfAbsent('/members')}
-          />
-          <DrawerItem
-            title='로그아웃'
-            Leading={PermIdentityIcon}
-            onClick={() => {
-              if (confirm('로그아웃하시겠습니까?')) {
-                userStore.logout()
-                history.replace('/')
-              }
-            }}
-          />
-        </>}
-      </List>
-    </Drawer>
+        <DrawerItem
+          title='로그아웃'
+          Leading={PermIdentityIcon}
+          onClick={() => {
+            if (confirm('로그아웃하시겠습니까?')) {
+              userStore.logout()
+              history.replace('/')
+            }
+          }}
+        />
+      </>}
+    </List>
+  )
+})
+
+export const DrawerSheet = observer(() => {
+  return (
+    <>
+      <Hidden smUp>
+        <Drawer
+          anchor='left'
+          open={appStore.isDrawerOpen}
+          onClose={() => appStore.isDrawerOpen = false}
+          variant='temporary'
+          ModalProps={{
+            keepMounted: true,
+          }}
+        >
+          <DrawerItemList/>
+        </Drawer>
+      </Hidden>
+      <Hidden xsDown>
+        <Drawer
+          anchor='left'
+          open
+          variant='permanent'
+        >
+          <DrawerItemList/>
+        </Drawer>
+      </Hidden>
+    </>
   )
 })
